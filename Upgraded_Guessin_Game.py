@@ -13,7 +13,7 @@ def show_rules():
 def get_valid_number():
     """Prompt user for a valid integer input, handling rules display."""
     while True:
-        user_input = input("🔢 Enter your guess (or type 'rules' for help): ")
+        user_input = input(" Enter your guess (or type 'rules' for help): ")
         
         if user_input.lower() == "rules":
             show_rules()
