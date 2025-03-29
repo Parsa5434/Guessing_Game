@@ -4,7 +4,7 @@ def show_rules():
     """Display game rules when requested."""
     print("""
     📜 The Rules:
-     1.Guess the correct number ➝ *2 points* 🎯
+    1.Guess the correct number ➝ *2 points* 🎯
     2.Guess within 5 of the correct number ➝ *1 point* ✅
     3.Fail to guess in 3 attempts ➝ PC gets *1 point* ❌
     4.First to reach 5 points wins 🏆
@@ -19,6 +19,9 @@ def get_valid_number():
             show_rules()
             continue  # Show rules and ask for input again
         
+        if user_input.lower() == "exit":
+            return "exit"  # Stop the game if the user types 'exit'
+        
         if user_input.isdigit():
             return int(user_input)  # Convert to integer and return
         
@@ -26,46 +29,54 @@ def get_valid_number():
 
 def play_game():
     """Main game loop."""
-    pc_score = 0
-    user_score = 0
+    while True:  # Infinite loop until 'exit' is typed
+        pc_score = 0
+        user_score = 0
 
-    print("\n🎮 Welcome to the Number Battle!")
-    print("💻 VS 🧑‍💻 — Who will win?\n")
+        print("\n🎮 Welcome to the Number Battle!")
+        print("💻 VS 🧑‍💻 — Who will win?\n")
 
-    while pc_score < 5 and user_score < 5:
-        print("\nNew Round!\n")
-        random_number = random.randint(1, 100)
-        awarded = False  # Track if points were given in this round
+        while pc_score < 5 and user_score < 5:
+            print("\nNew Round!\n")
+            random_number = random.randint(1, 100)
+            awarded = False  # Track if points were given in this round
 
-        for attempt in range(3):
-            num = get_valid_number()
+            for attempt in range(3):
+                num = get_valid_number()
 
-            if num == random_number:
-                print("🎯 Correct! You earn *2 points*!")
-                user_score += 2
-                awarded = True
-                break  # End round early if correct
-            elif abs(num - random_number) <= 5 and not awarded:
-                print("✅ Close! You earn *1 point*!")
-                user_score += 1
-                awarded = True  # Prevent multiple close-guess points
-                break  # End round after awarding 1 point
-            else:
-                print("❌ Wrong guess. Try again!")
+                if num == "exit":
+                    print("\n💻 Game Over. Thank you for playing!")
+                    return  # Exit the game if the user types 'exit'
 
-        if not awarded:  # If no points were earned
-            print(f"😢 Out of attempts! The correct number was *{random_number}*.")
-            pc_score += 1
+                if num == random_number:
+                    print("🎯 Correct! You earn *2 points*!")
+                    user_score += 2
+                    awarded = True
+                    break  # End round early if correct
+                elif abs(num - random_number) <= 5 and not awarded:
+                    print("✅ Close! You earn *1 point*!")
+                    user_score += 1
+                    awarded = True  # Prevent multiple close-guess points
+                    break  # End round after awarding 1 point
+                else:
+                    print("❌ Wrong guess. Try again!")
 
-        print(f"\n📊 Scoreboard:\n💻 PC: {pc_score} | 🧑‍💻 User: {user_score}")
+            if not awarded:  # If no points were earned
+                print(f"😢 Out of attempts! The correct number was *{random_number}*.")
+                pc_score += 1
 
-    # Announce winner
-    if user_score >= 5:
-        print("\n🏆 *Congratulations! The User wins!* 🎉")
-    else:
-        print("\n💻 *Game Over! The PC wins!* 😢")
+            print(f"\n📊 Scoreboard:\n💻 PC: {pc_score} | 🧑‍💻 User: {user_score}")
 
-    input("\nPress Enter to exit...")
+        # Announce winner
+        if user_score >= 5:
+            print("\n🏆 *Congratulations! The User wins!* 🎉")
+        else:
+            print("\n💻 *Game Over! The PC wins!* 😢")
+
+        exit_choice = input("\nDo you want to play again? Type 'exit' to quit or press Enter to continue: ")
+        if exit_choice.lower() == "exit":
+            print("\n💻 Game Over. Thank you for playing!")
+            break  # Exit the infinite loop and end the game
 
 # Run the game
 play_game()
