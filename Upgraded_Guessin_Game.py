@@ -4,10 +4,10 @@ def show_rules():
     """Display game rules when requested."""
     print("""
     📜 The Rules:
-    1️⃣ Guess the correct number ➝ +2 points 🎯
-    2️⃣ Guess within 5 of the correct number ➝ +1 point ✅
-    3️⃣ Fail to guess in 3 attempts ➝ PC gets +1 point ❌
-    4️⃣ First to reach 5 points wins 🏆
+    1️.Guess the correct number ➝ +2 points 🎯
+    2️.Guess within 5 of the correct number ➝ +1 point ✅
+    3️.Fail to guess in 3 attempts ➝ PC gets +1 point ❌
+    4.First to reach 5 points wins 🏆
     """)
 
 def get_valid_number():
