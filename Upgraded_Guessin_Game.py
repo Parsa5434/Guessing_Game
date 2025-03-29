@@ -40,27 +40,27 @@ def play_game():
             num = get_valid_number()
 
             if num == random_number:
-                print("🎯 Correct! You earn **2 points**!")
+                print("🎯 Correct! You earn *2 points*!")
                 user_score += 2
                 break
             elif abs(num - random_number) <= 5:
-                print("✅ Close! You earn **1 point**!")
+                print("✅ Close! You earn *1 point*!")
                 user_score += 1
                 break
             else:
                 print("❌ Wrong guess. Try again!")
 
         else:  # If loop completes without a break
-            print(f"😢 Out of attempts! The correct number was **{random_number}**.")
+            print(f"😢 Out of attempts! The correct number was *{random_number}*.")
             pc_score += 1
 
         print(f"\n📊 Scoreboard:\n💻 PC: {pc_score} | 🧑‍💻 User: {user_score}")
 
     # Announce winner
     if user_score >= 5:
-        print("\n🏆 **Congratulations! The User wins!** 🎉")
+        print("\n🏆 *Congratulations! The User wins!* 🎉")
     else:
-        print("\n💻 **Game Over! The PC wins!** 😈")
+        print("\n💻 *Game Over! The PC wins!* 😢")
 
     input("\nPress Enter to exit...")
 
